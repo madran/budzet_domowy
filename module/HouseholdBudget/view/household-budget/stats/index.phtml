@@ -1,0 +1,29 @@
+<div style="text-align: center;">
+<a href="<?php echo $this->url('home/stats', array('year' => (int) $date->format('Y') - 1)); ?>"><?php echo (int) $date->format('Y') - 1 ?></a>
+<span style="width: 300px; margin: 0; padding: 0;"><?php echo $date->format('Y'); ?></span>
+<a href="<?php echo $this->url('home/stats', array('year' => (int) $date->format('Y') + 1)); ?>"><?php echo (int) $date->format('Y') + 1 ?></a>
+</div>
+
+
+<div style="clear: both; margin: auto;">
+    <?php foreach ($operationsSummaryIncome as $index => $income) { ?>
+        <?php $height = round((($income['total'] / $highestValue) * 100) / 100 * 300); ?>
+        <div class="stats_bar_white"></div>
+        <div class="stats_bar_container">
+            <div class="stats_bar_income" style="height: <?php echo $height; ?>px; margin-top= <?php echo -300 - $height; ?>px;"></div>
+            <?php echo $income['total']; ?>
+            <?php echo $income['month']; ?>
+        </div>
+        <div class="stats_bar_container">
+            <?php if (isset($operationsSummaryExpense[$index])) { ?>
+                <?php $height = round(((-$operationsSummaryExpense[$index]['total'] / $highestValue) * 100) / 100 * 300); ?>
+                <div class="stats_bar_expense" style="height: <?php echo $height; ?>px;"></div>
+                <?php echo -$operationsSummaryExpense[$index]['total'] ?>
+            <?php } ?>
+        </div>
+        <div class="stats_bar_white"></div>
+    <?php } ?>
+    <div class="stats_month">
+    </div>
+        <div style="clear: both"></div>
+</div>

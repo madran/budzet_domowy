@@ -1,0 +1,42 @@
+<?php
+
+namespace HouseholdBudget\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * UserRole
+ *
+ * @ORM\Table(name="user_role", uniqueConstraints={@ORM\UniqueConstraint(name="user_type_UNIQUE", columns={"role"})}, indexes={@ORM\Index(name="fk_user_role_user_role1", columns={"parent"})})
+ * @ORM\Entity
+ */
+class UserRole
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="role", type="string", length=45, nullable=false)
+     */
+    private $role;
+
+    /**
+     * @var \HouseholdBudget\Entity\UserRole
+     *
+     * @ORM\ManyToOne(targetEntity="HouseholdBudget\Entity\UserRole")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="parent", referencedColumnName="id")
+     * })
+     */
+    private $parent;
+
+
+}

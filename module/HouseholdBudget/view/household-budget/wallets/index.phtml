@@ -1,0 +1,20 @@
+<div class="add_link"><a href="<?php echo $this->url('home/wallets/wallets_add', array()); ?>">Add</a></div>
+<table class="table">
+    <tr>
+        <th>Wallet</th>
+        <th>Description</th>
+        <th>Total</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach ($wallets as $wallet): ?>
+    <tr>
+        <td><?php echo $wallet->getName(); ?></td>
+        <td><?php echo $wallet->getDescription(); ?></td>
+        <td><?php echo ($wallet->getTotal() ? $wallet->getTotal() : '0'); ?></td>
+        <td>
+            <a href="<?php echo $this->url('home/wallets/wallets_edit', array('id' => $wallet->getId()));?>">Edit</a> |
+            <a href="<?php echo $this->url('home/wallets/wallets_delete', array('id' => $wallet->getId()));?>">Delete</a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>

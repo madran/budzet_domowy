@@ -1,0 +1,13 @@
+<?php
+$form->setAttribute('action', $this->url('home/operations/operations_add', array('type' => $operationType)));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formRow($form->get('amount'));
+echo $this->formRow($form->get('wallet'));
+echo $operationType == 'transfer' ? $this->formRow($form->get('wallet2')) : '';
+echo $this->formRow($form->get('description'));
+echo $this->formRow($form->get('user_id'));
+echo $this->formRow($form->get('csrf'));
+echo $this->formRow($form->get('submit'));
+echo $this->form()->closeTag();

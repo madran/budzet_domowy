@@ -1,0 +1,76 @@
+<?php
+
+namespace HouseholdBudget\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Operation
+ *
+ * @ORM\Table(name="operation", indexes={@ORM\Index(name="fk_operation_wallet1", columns={"wallet_id"}), @ORM\Index(name="fk_operation_user1", columns={"user_id"}), @ORM\Index(name="fk_operation_operation_type1", columns={"operation_type_id"})})
+ * @ORM\Entity
+ */
+class Operation
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="amount", type="integer", nullable=false)
+     */
+    private $amount;
+
+    /**
+     * @var \DateTime
+     *
+     * @ORM\Column(name="date", type="datetime", nullable=false)
+     */
+    private $date = 'CURRENT_TIMESTAMP';
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var \HouseholdBudget\Entity\Wallet
+     *
+     * @ORM\ManyToOne(targetEntity="HouseholdBudget\Entity\Wallet")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="wallet_id", referencedColumnName="id")
+     * })
+     */
+    private $wallet;
+
+    /**
+     * @var \HouseholdBudget\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="HouseholdBudget\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * })
+     */
+    private $user;
+
+    /**
+     * @var \HouseholdBudget\Entity\OperationType
+     *
+     * @ORM\ManyToOne(targetEntity="HouseholdBudget\Entity\OperationType")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="operation_type_id", referencedColumnName="id")
+     * })
+     */
+    private $operationType;
+
+
+}

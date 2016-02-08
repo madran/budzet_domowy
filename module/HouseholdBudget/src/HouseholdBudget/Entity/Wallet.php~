@@ -1,0 +1,56 @@
+<?php
+
+namespace HouseholdBudget\Entity;
+
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * Wallet
+ *
+ * @ORM\Table(name="wallet", indexes={@ORM\Index(name="fk_wallet_user1", columns={"user_id"})})
+ * @ORM\Entity
+ */
+class Wallet
+{
+    /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string", length=45, nullable=false)
+     */
+    private $name;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="description", type="text", nullable=true)
+     */
+    private $description;
+
+    /**
+     * @var boolean
+     *
+     * @ORM\Column(name="deleted", type="boolean", nullable=false)
+     */
+    private $deleted = '0';
+
+    /**
+     * @var \HouseholdBudget\Entity\User
+     *
+     * @ORM\ManyToOne(targetEntity="HouseholdBudget\Entity\User")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     * })
+     */
+    private $user;
+
+
+}

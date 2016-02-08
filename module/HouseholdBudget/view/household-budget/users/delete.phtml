@@ -1,0 +1,12 @@
+Do you want remove user <?php echo $user->getUsername(); ?>.
+<?php
+$form->setAttribute('action', $this->url('home/users/users_delete', array('id' => $id)));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formRow($form->get('id'));
+echo $this->formRow($form->get('csrf'));
+echo $this->formRow($form->get('submit'));
+echo $this->form()->closeTag();
+?>
+<a href="<?php echo $this->url('home/users'); ?>">No!!!</a>

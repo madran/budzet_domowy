@@ -1,0 +1,13 @@
+<?php
+$form->setAttribute('action', $this->url('home/wallets/wallets_edit', array('id' => $id)));
+$form->prepare();
+//
+echo $this->form()->openTag($form);
+echo $this->formRow($form->get('id'));
+echo $this->formRow($form->get('name'));
+echo $this->formRow($form->get('description'));
+echo $this->formRow($form->get('user_id'));
+echo $this->formRow($form->get('deleted'));
+echo $this->formRow($form->get('csrf'));
+echo $this->formRow($form->get('submit'));
+echo $this->form()->closeTag();

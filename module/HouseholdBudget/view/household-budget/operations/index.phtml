@@ -1,0 +1,35 @@
+<div class="add_link"><a href="<?php echo $this->url('home/operations/operations_add', array('type' => 'income')); ?>">Add income</a></div>
+<div class="add_link"><a href="<?php echo $this->url('home/operations/operations_add', array('type' => 'expense')); ?>">Add expense</a></div>
+<div class="add_link"><a href="<?php echo $this->url('home/operations/operations_add', array('type' => 'transfer')); ?>">Add transfer</a></div>
+
+<?php if(isset($this->messages[0])) { ?>
+<div class="message_red">
+    <?php echo $this->messages[0]; ?>
+</div>
+<?php } ?>
+
+<table class="table">
+    <tr>
+        <th>Date</th>
+        <th>Operation type</th>
+        <th>Description</th>
+        <th>Wallet</th>
+        <th>Amount</th>
+        <th>&nbsp;</th>
+    </tr>
+    <?php foreach ($operations as $index => $wallet): ?>
+    <tr>
+        <td><?php echo $wallet->getDate()->format('d-m-Y H:i:s'); ?></td>
+        <td><?php echo $wallet->getOperationType()->getName(); ?></td>
+        <td><?php echo $wallet->getDescription(); ?></td>
+        <td><?php echo $wallet->getWallet()->getName(); ?></td>
+        <td><?php echo $wallet->getAmount(); ?></td>
+        <td style="text-align: right;">
+            <?php if($index == 0) {?>
+                <a href="<?php echo $this->url('home/operations/operations_delete', array('id' => $wallet->getId()));?>">Delete</a>
+            <?php } ?>
+            <a href="<?php echo $this->url('home/operations/operations_edit', array('id' => $wallet->getId()));?>">Edit</a>
+        </td>
+    </tr>
+    <?php endforeach; ?>
+</table>

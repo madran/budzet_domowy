@@ -1,0 +1,38 @@
+<?php if(isset($this->messages[0])) { ?>
+<div class="message">
+    <?php echo $this->messages[0]; ?>
+</div>
+<?php } ?>
+
+<?php
+$form = $this->form;
+$form->setAttribute('action', $this->url('home/login'));
+$form->prepare();
+
+echo $this->form()->openTag($form);
+echo $this->formRow($form->get('username'));
+echo $this->formRow($form->get('password'));
+echo $this->formRow($form->get('rememberme'));
+echo $this->formSubmit($form->get('submit'));
+echo $this->form()->closeTag();
+?>
+
+<?php
+try {
+    if ($user = $this->identity()) {
+        echo 'Logged in as ' . $this->escapeHtml($user->getUsername());
+?>	
+ | <a href="<?php echo $this->url('home/logout');?>"><?php echo 'Logout'; ?></a>
+<?php
+    } else {
+        echo 'Not logged in';
+    }
+}
+catch(Exception $e) {
+    echo $e->getMessage();
+}
+?>
+
+<p>
+<a href="<?php echo $this->url('home/register');?>"><?php echo $this->translate('Register'); ?></a>
+</p>
