@@ -1,1 +1,1 @@
-http://interfejs-systemu-doradczego.madran.laohost.net/public/
+http://budzet-domowy.madran.laohost.net/public/login/
